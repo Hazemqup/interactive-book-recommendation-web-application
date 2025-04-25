@@ -22,11 +22,11 @@ const books = [
   
     // Filter the books based on the selected criteria
     const filtered = books.filter(book =>
-      (genre === "all" || book.genre === genre) &&
+      (genre === "all" || genre === "" || book.genre === genre) &&
       (author === "" || book.author.toLowerCase().includes(author)) &&
-      book.price <= price &&
-      book.rating >= rating &&
-      book.year >= year
+      (isNaN(price) || book.price <= price) &&
+      (isNaN(rating) || book.rating >= rating) &&
+      (isNaN(year) || book.year >= year)
     );
   // Display the results
     showResults(filtered);
